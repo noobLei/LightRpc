@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--scan service package 扫描包-->
+    <context:component-scan base-package="com.app.test.service"/>
+<!--    加载配置文件-->
+    <context:property-placeholder location="classpath:rpc.properties"/>
+
+    <!-- 配置服务注册组件 好像没用到，就注释了-->
+<!--    <bean id="serviceRegistry" class="com.netty.rpc.server.registry.ServiceRegistry">-->
+<!--        <constructor-arg name="registryAddress" value="${registry.address}"/>-->
+<!--    </bean>-->
+
+    <!-- 配置 RPC 服务器 -->
+    <bean id="rpcServer" class="com.netty.rpc.server.RpcServer">
+        <constructor-arg name="serverAddress" value="${server.address}"/>
+        <constructor-arg name="registryAddress" value="${registry.address}"/>
+    </bean>
+
+</beans>
